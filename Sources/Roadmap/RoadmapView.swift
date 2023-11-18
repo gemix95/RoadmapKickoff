@@ -22,12 +22,17 @@ public struct RoadmapView<Header: View, Footer: View>: View {
     var featuresList: some View {
         List {
             header
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             ForEach(viewModel.filteredFeatures) { feature in
                 RoadmapFeatureView(viewModel: viewModel.featureViewModel(for: feature))
                     .macOSListRowSeparatorHidden()
+                    .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
             }
             footer
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
         }
     }
 }
