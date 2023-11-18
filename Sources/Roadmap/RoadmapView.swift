@@ -14,10 +14,14 @@ public struct RoadmapView<Header: View, Footer: View, Loader: View>: View {
     let loader: Loader
     
     public var body: some View {
+        if viewModel.filteredFeatures.isEmpty {
+            loader
+        } else {
             featuresList
                 .scrollContentHidden()
                 .listStyle(.plain)
                 .conditionalSearchable(if: viewModel.allowSearching, text: $viewModel.searchText)
+        }
     }
     
     var featuresList: some View {
@@ -26,15 +30,11 @@ public struct RoadmapView<Header: View, Footer: View, Loader: View>: View {
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
             
-            if viewModel.filteredFeatures.isEmpty {
-                loader
-            } else {
-                ForEach(viewModel.filteredFeatures) { feature in
-                    RoadmapFeatureView(viewModel: viewModel.featureViewModel(for: feature))
-                        .macOSListRowSeparatorHidden()
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                }
+            ForEach(viewModel.filteredFeatures) { feature in
+                RoadmapFeatureView(viewModel: viewModel.featureViewModel(for: feature))
+                    .macOSListRowSeparatorHidden()
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
             }
             footer
                 .listRowSeparator(.hidden)
