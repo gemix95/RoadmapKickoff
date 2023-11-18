@@ -13,7 +13,7 @@ struct RoadmapVoteButton: View {
     
     @State private var isHovering = false
     @State private var showNumber = false
-    @State private var hasVoted = false
+    @State private var hasVoted = true
     
     var body: some View {
         Button {

@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-public struct RoadmapView<Header: View, Footer: View>: View {
+public struct RoadmapView<Header: View, Footer: View, Loader: View>: View {
     @StateObject var viewModel: RoadmapViewModel
     let header: Header
     let footer: Footer
+    let loader: Loader
     
     public var body: some View {
             featuresList
@@ -24,11 +25,16 @@ public struct RoadmapView<Header: View, Footer: View>: View {
             header
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-            ForEach(viewModel.filteredFeatures) { feature in
-                RoadmapFeatureView(viewModel: viewModel.featureViewModel(for: feature))
-                    .macOSListRowSeparatorHidden()
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
+            
+            if viewModel.filteredFeatures.isEmpty {
+                loader
+            } else {
+                ForEach(viewModel.filteredFeatures) { feature in
+                    RoadmapFeatureView(viewModel: viewModel.featureViewModel(for: feature))
+                        .macOSListRowSeparatorHidden()
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
+                }
             }
             footer
                 .listRowSeparator(.hidden)
@@ -38,31 +44,33 @@ public struct RoadmapView<Header: View, Footer: View>: View {
 }
 
 public extension RoadmapView where Header == EmptyView, Footer == EmptyView {
-    init(configuration: RoadmapConfiguration) {
-        self.init(viewModel: .init(configuration: configuration), header: EmptyView(), footer: EmptyView())
+    init(configuration: RoadmapConfiguration, @ViewBuilder loader: () -> Loader) {
+        self.init(viewModel: .init(configuration: configuration), header: EmptyView(), footer: EmptyView(), loader: loader())
     }
 }
 
 public extension RoadmapView where Header: View, Footer == EmptyView {
-    init(configuration: RoadmapConfiguration, @ViewBuilder header: () -> Header) {
-        self.init(viewModel: .init(configuration: configuration), header: header(), footer: EmptyView())
+    init(configuration: RoadmapConfiguration, @ViewBuilder header: () -> Header, @ViewBuilder loader: () -> Loader) {
+        self.init(viewModel: .init(configuration: configuration), header: header(), footer: EmptyView(), loader: loader())
     }
 }
 
 public extension RoadmapView where Header == EmptyView, Footer: View {
-    init(configuration: RoadmapConfiguration, @ViewBuilder footer: () -> Footer) {
-        self.init(viewModel: .init(configuration: configuration), header: EmptyView(), footer: footer())
+    init(configuration: RoadmapConfiguration, @ViewBuilder footer: () -> Footer, @ViewBuilder loader: () -> Loader) {
+        self.init(viewModel: .init(configuration: configuration), header: EmptyView(), footer: footer(), loader: loader())
     }
 }
 
 public extension RoadmapView where Header: View, Footer: View {
-    init(configuration: RoadmapConfiguration, @ViewBuilder header: () -> Header, @ViewBuilder footer: () -> Footer) {
-        self.init(viewModel: .init(configuration: configuration), header: header(), footer: footer())
+    init(configuration: RoadmapConfiguration, @ViewBuilder header: () -> Header, @ViewBuilder footer: () -> Footer, @ViewBuilder loader: () -> Loader) {
+        self.init(viewModel: .init(configuration: configuration), header: header(), footer: footer(), loader: loader())
     }
 }
 
 struct RoadmapView_Previews: PreviewProvider {
     static var previews: some View {
-        RoadmapView(configuration: .sampleURL())
+        RoadmapView(configuration: .sampleURL()) {
+            EmptyView()
+        }
     }
 }
