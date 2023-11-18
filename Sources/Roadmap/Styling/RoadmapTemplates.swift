@@ -18,6 +18,7 @@ public enum RoadmapTemplate: CaseIterable {
             return RoadmapStyle(upvoteIcon: Image(systemName: "arrowtriangle.up.fill"),
                                 unvoteIcon: Image(systemName: "arrowtriangle.down.fill"),
                                 titleFont: self.titleFont,
+                                descriptionFont: self.descriptionFont,
                                 numberFont: self.numberFont,
                                 statusFont: self.captionFont,
                                 cornerRadius: 10)
@@ -25,6 +26,7 @@ public enum RoadmapTemplate: CaseIterable {
             return RoadmapStyle(upvoteIcon: Image(systemName: "arrow.up"),
                                 unvoteIcon: Image(systemName: "arrow.down"),
                                 titleFont: self.titleFont,
+                                descriptionFont: self.descriptionFont,
                                 numberFont: self.numberFont,
                                 statusFont: self.captionFont,
                                 cornerRadius: 15)
@@ -32,6 +34,7 @@ public enum RoadmapTemplate: CaseIterable {
             return RoadmapStyle(upvoteIcon: Image(systemName: "chevron.up"),
                                 unvoteIcon: Image(systemName: "chevron.down"),
                                 titleFont: self.titleFont,
+                                descriptionFont: self.descriptionFont,
                                 numberFont: self.numberFont,
                                 statusFont: self.captionFont,
                                 cornerRadius: 5)
@@ -39,6 +42,7 @@ public enum RoadmapTemplate: CaseIterable {
             return RoadmapStyle(upvoteIcon: Image(systemName: "chevron.up"),
                                 unvoteIcon: Image(systemName: "chevron.down"),
                                 titleFont: self.titleFont,
+                                descriptionFont: self.descriptionFont,
                                 numberFont: self.numberFont,
                                 statusFont: self.captionFont,
                                 cornerRadius: 2)
@@ -70,6 +74,22 @@ public enum RoadmapTemplate: CaseIterable {
                 return Font.system(.headline, design: self.fontDesign, weight: .bold)
             } else {
                 return Font.system(.headline, design: self.fontDesign).weight(.bold)
+            }
+        #endif
+    }
+    
+    var descriptionFont: Font {
+        #if os(macOS)
+            if #available(macOS 13.0, *) {
+                return Font.system(.headline, design: self.fontDesign, weight: .light)
+            } else {
+                return Font.headline
+            }
+        #else
+            if #available(iOS 16.0, *) {
+                return Font.system(.headline, design: self.fontDesign, weight: .light)
+            } else {
+                return Font.system(.headline, design: self.fontDesign).weight(.light)
             }
         #endif
     }
