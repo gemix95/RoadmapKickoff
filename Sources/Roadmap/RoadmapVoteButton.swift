@@ -37,13 +37,13 @@ struct RoadmapVoteButton: View {
                         if viewModel.canVote {
                             if !viewModel.feature.hasVoted {
                                 viewModel.configuration.style.upvoteIcon
-                                    .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                    .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                     .imageScale(.large)
                                     .font(Font.system(size: 17, weight: .medium))
                                     .frame(maxWidth: 24, maxHeight: 24)
                             } else {
                                 viewModel.configuration.style.unvoteIcon
-                                    .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                    .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                     .imageScale(.large)
                                     .font(Font.system(size: 17, weight: .medium))
                                     .frame(maxWidth: 24, maxHeight: 24)
@@ -53,7 +53,7 @@ struct RoadmapVoteButton: View {
                         if showNumber {
                             Text("\(viewModel.voteCount)")
                                 .lineLimit(1)
-                                .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                 .minimumScaleFactor(0.5)
                                 .font(viewModel.configuration.style.numberFont)
                         }
@@ -66,14 +66,14 @@ struct RoadmapVoteButton: View {
                         if viewModel.canVote {
                             if !viewModel.feature.hasVoted {
                                 viewModel.configuration.style.upvoteIcon
-                                    .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                    .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                     .imageScale(.large)
                                     .font(viewModel.configuration.style.numberFont)
                                     .frame(maxWidth: 20, maxHeight: 20)
                                     .minimumScaleFactor(0.75)
                             } else {
                                 viewModel.configuration.style.unvoteIcon
-                                    .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                    .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                     .imageScale(.large)
                                     .font(viewModel.configuration.style.numberFont)
                                     .frame(maxWidth: 20, maxHeight: 20)
@@ -84,7 +84,7 @@ struct RoadmapVoteButton: View {
                         if showNumber {
                             Text("\(viewModel.voteCount)")
                                 .lineLimit(1)
-                                .foregroundColor(hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
                                 .font(viewModel.configuration.style.numberFont)
                                 .minimumScaleFactor(0.9)
                         }
@@ -139,7 +139,7 @@ struct RoadmapVoteButton: View {
     
     private var backgroundView: some View {
         viewModel.configuration.style.tintColor
-            .opacity(hasVoted ? 1 : 0.1)
+            .opacity(hasVoted ? 0.1 : 1)
             .clipShape(RoundedRectangle(cornerRadius: viewModel.configuration.style.radius, style: .continuous))
     }
 }

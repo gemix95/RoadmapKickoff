@@ -17,6 +17,9 @@ public struct RoadmapStyle {
     /// The font used for the feature
     public var titleFont: Font
     
+    /// The font used for the description
+    public var descriptionFont: Font
+    
     /// The font used for the count label
     public var numberFont: Font
     
@@ -53,6 +56,7 @@ public struct RoadmapStyle {
     public init(upvoteIcon: Image,
                 unvoteIcon: Image,
                 titleFont: Font,
+                descriptionFont: Font,
                 numberFont: Font,
                 statusFont: Font,
                 statusTintColor: @escaping (String) -> Color = { _ in Color.primary },
@@ -64,6 +68,7 @@ public struct RoadmapStyle {
         self.upvoteIcon = upvoteIcon
         self.unvoteIcon = unvoteIcon
         self.titleFont = titleFont
+        self.descriptionFont = descriptionFont
         self.numberFont = numberFont
         self.statusFont = statusFont
         self.statusTintColor = statusTintColor
