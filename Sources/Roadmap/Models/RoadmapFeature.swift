@@ -59,7 +59,7 @@ struct LocalizedItem: Codable {
 
 extension [LocalizedItem]? {
     var currentLocal: String? {
-        self?.first(where: { $0.language == Language.code })?.value
+        self?.first(where: { $0.language == RoadmapConfiguration.languageCode })?.value
     }
 }
 

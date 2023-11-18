@@ -29,6 +29,8 @@ public struct RoadmapConfiguration {
 
     /// If set, will be used for sorting features.
     public let sorting: ((RoadmapFeature, RoadmapFeature) -> Bool)?
+    
+    public static var languageCode: String = "en"
 
     /// Creates a new Roadmap configuration instance.
     /// - Parameters:
@@ -51,7 +53,8 @@ public struct RoadmapConfiguration {
                 shuffledOrder: Bool = false,
                 sorting: ((RoadmapFeature, RoadmapFeature) -> Bool)? = nil,
                 allowVotes: Bool = true,
-                allowSearching: Bool = false) {
+                allowSearching: Bool = false,
+                languageCode: String) {
         
         guard roadmapJSONURL != nil || roadmapRequest != nil else {
             fatalError("Missing roadmap URL or request")
@@ -72,6 +75,7 @@ public struct RoadmapConfiguration {
         self.sorting = sorting
         self.allowVotes = allowVotes
         self.allowSearching = allowSearching
+        Self.languageCode = languageCode
     }
 
 }
@@ -79,7 +83,7 @@ public struct RoadmapConfiguration {
 extension RoadmapConfiguration {
     
     static func sampleURL() -> RoadmapConfiguration {
-        .init(roadmapJSONURL: URL(string: "https://simplejsoncms.com/api/vq2juq1xhg")!, namespace: "roadmaptest")
+        .init(roadmapJSONURL: URL(string: "https://simplejsoncms.com/api/vq2juq1xhg")!, namespace: "roadmaptest", languageCode: "en")
     }
     
     static func sampleRequest() -> RoadmapConfiguration {
@@ -87,6 +91,6 @@ extension RoadmapConfiguration {
         var request = URLRequest(url: URL(string: "https://simplejsoncms.com/api/vq2juq1xhg")!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        return RoadmapConfiguration.init(roadmapRequest: request, namespace: "roadmaptest")
+        return RoadmapConfiguration.init(roadmapRequest: request, namespace: "roadmaptest", languageCode: "")
     }
 }

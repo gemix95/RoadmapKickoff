@@ -13,7 +13,8 @@ final class RoadmapTests: XCTestCase {
         
         let configuration = RoadmapConfiguration(
             roadmapJSONURL: URL(string: "https://www.avanderlee.com/")!,
-            voter: voter
+            voter: voter,
+            languageCode: "en"
         )
         
         let model = RoadmapFeatureViewModel(feature: feature, configuration: configuration)
