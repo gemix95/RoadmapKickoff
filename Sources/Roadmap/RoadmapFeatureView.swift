@@ -44,13 +44,9 @@ struct RoadmapFeatureView: View {
                     let status = viewModel.feature.unlocalizedFeatureStatus
                     Text(localizedStatus)
                         .padding(6)
-                        .background(viewModel.configuration.style.statusTintColor(status).opacity(0.1))
-                        .foregroundColor(viewModel.configuration.style.statusTintColor(status))
+                        .background(makeBackgroundStatusColor(with: status))
+                        .foregroundColor(makeForegroundStatusColor(with: status))
                         .cornerRadius(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(viewModel.configuration.style.statusTintColor(status).opacity(0.15), lineWidth: 1)
-                        )
                         .font(viewModel.configuration.style.statusFont)
                 }
             }
@@ -94,18 +90,40 @@ struct RoadmapFeatureView: View {
                     let status = viewModel.feature.unlocalizedFeatureStatus
                     Text(localizedStatus)
                         .padding(6)
-                        .background(viewModel.configuration.style.statusTintColor(status).opacity(0.1))
-                        .foregroundColor(viewModel.configuration.style.statusTintColor(status))
+                        .background(makeBackgroundStatusColor(with: status))
+                        .foregroundColor(makeForegroundStatusColor(with: status))
                         .cornerRadius(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(viewModel.configuration.style.statusTintColor(status).opacity(0.15), lineWidth: 1)
-                        )
                         .font(viewModel.configuration.style.statusFont)
                 }
             }
         }
         .padding()
+    }
+    
+    func makeBackgroundStatusColor(with status: String) -> Color {
+        switch status.lowercased() {
+        case "work in progress":
+            return Color(red: 10/255, green: 255/255, blue: 175/255)
+        case "backlog":
+            return Color(red: 35/255, green: 97/255, blue: 90/255)
+        case "released":
+            return Color(red: 8/255, green: 21/255, blue: 19/255)
+        default:
+            return Color.primary
+        }
+    }
+    
+    func makeForegroundStatusColor(with status: String) -> Color {
+        switch status.lowercased() {
+        case "work in progress":
+            return Color(red: 20/255, green: 28/255, blue: 33/255)
+        case "backlog":
+            return Color(red: 19/255, green: 255/255, blue: 172/255)
+        case "released":
+            return Color(red: 35/255, green: 97/255, blue: 90/255)
+        default:
+            return Color.secondary
+        }
     }
 }
 
