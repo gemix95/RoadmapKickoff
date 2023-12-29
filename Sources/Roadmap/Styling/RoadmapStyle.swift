@@ -38,6 +38,9 @@ public struct RoadmapStyle {
     /// The main tintColor for the roadmap views.
     public var tintColor: Color
     
+    /// The text color for the roadmap views.
+    public var descriptionTextColor: Color
+    
     /// Define a `RoadmapStyle` to customise Roadmap to your needs
     /// - Parameters:
     ///   - upvoteIcon: Image view that you want to use for the upvote icon 24x24 of size is best
@@ -49,16 +52,20 @@ public struct RoadmapStyle {
     ///   - cellColor: The backgroundColor of each cell
     ///   - selectedColor: The color of the text and icon when voted
     ///   - tint: The main tintColor for the roadmap views.
-    public init(upvoteIcon: Image,
-                unvoteIcon: Image,
-                titleFont: Font,
-                descriptionFont: Font,
-                numberFont: Font,
-                statusFont: Font,
-                cornerRadius: CGFloat,
-                cellColor: Color = Color.defaultCellColor,
-                selectedColor: Color = .white,
-                tint: Color = .accentColor)
+    ///   - descriptionTextColor: The main description color
+    public init(
+        upvoteIcon: Image,
+        unvoteIcon: Image,
+        titleFont: Font,
+        descriptionFont: Font,
+        numberFont: Font,
+        statusFont: Font,
+        cornerRadius: CGFloat,
+        cellColor: Color = Color.defaultCellColor,
+        selectedColor: Color = .white,
+        tint: Color = .accentColor,
+        descriptionTextColor: Color = .accentColor
+    )
     {
         self.upvoteIcon = upvoteIcon
         self.unvoteIcon = unvoteIcon
@@ -70,5 +77,6 @@ public struct RoadmapStyle {
         self.cellColor = cellColor
         self.selectedForegroundColor = selectedColor
         self.tintColor = tint
+        self.descriptionTextColor = descriptionTextColor
     }
 }
