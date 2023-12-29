@@ -17,6 +17,9 @@ public struct RoadmapStyle {
     /// The font used for the feature
     public var titleFont: Font
     
+    /// The color used for the title
+    public var titleColor: Color
+    
     /// The font used for the description
     public var descriptionFont: Font
     
@@ -38,7 +41,7 @@ public struct RoadmapStyle {
     /// The main tintColor for the roadmap views.
     public var tintColor: Color
     
-    /// The text color for the roadmap views.
+    /// The color for the description.
     public var descriptionTextColor: Color
     
     /// Define a `RoadmapStyle` to customise Roadmap to your needs
@@ -57,6 +60,7 @@ public struct RoadmapStyle {
         upvoteIcon: Image,
         unvoteIcon: Image,
         titleFont: Font,
+        titleColor: Color = .primary,
         descriptionFont: Font,
         numberFont: Font,
         statusFont: Font,
@@ -64,12 +68,13 @@ public struct RoadmapStyle {
         cellColor: Color = Color.defaultCellColor,
         selectedColor: Color = .white,
         tint: Color = .accentColor,
-        descriptionTextColor: Color = .accentColor
+        descriptionTextColor: Color = .primary
     )
     {
         self.upvoteIcon = upvoteIcon
         self.unvoteIcon = unvoteIcon
         self.titleFont = titleFont
+        self.titleColor = titleColor
         self.descriptionFont = descriptionFont
         self.numberFont = numberFont
         self.statusFont = statusFont

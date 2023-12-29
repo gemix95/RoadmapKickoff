@@ -32,6 +32,7 @@ struct RoadmapFeatureView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewModel.feature.localizedFeatureTitle)
                     .font(viewModel.configuration.style.titleFont)
+                    .foregroundColor(viewModel.configuration.style.titleColor)
                 
                 let description = viewModel.feature.localizedFeatureDescription
                 if !description.isEmpty {
