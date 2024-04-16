@@ -103,27 +103,18 @@ struct RoadmapFeatureView: View {
     func makeBackgroundStatusColor(with status: String) -> Color {
         switch status.lowercased() {
         case "work in progress":
-            return Color(red: 10/255, green: 255/255, blue: 175/255)
+            return viewModel.configuration.style.cellColor
         case "backlog":
-            return Color(red: 35/255, green: 97/255, blue: 90/255)
+            return viewModel.configuration.style.cellColor.opacity(0.7)
         case "released":
-            return Color(red: 8/255, green: 21/255, blue: 19/255)
+            return viewModel.configuration.style.cellColor.opacity(0.3)
         default:
             return Color.primary
         }
     }
     
     func makeForegroundStatusColor(with status: String) -> Color {
-        switch status.lowercased() {
-        case "work in progress":
-            return Color(red: 20/255, green: 28/255, blue: 33/255)
-        case "backlog":
-            return Color(red: 19/255, green: 255/255, blue: 172/255)
-        case "released":
-            return Color(red: 35/255, green: 97/255, blue: 90/255)
-        default:
-            return Color.secondary
-        }
+        Color.secondary
     }
 }
 
