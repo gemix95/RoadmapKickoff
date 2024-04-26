@@ -84,7 +84,7 @@ struct RoadmapVoteButton: View {
                         if showNumber {
                             Text("\(viewModel.voteCount)")
                                 .lineLimit(1)
-                                .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : viewModel.configuration.style.tintColor)
+                                .foregroundColor(!hasVoted ? viewModel.configuration.style.selectedForegroundColor : .primary)
                                 .font(viewModel.configuration.style.numberFont)
                                 .minimumScaleFactor(0.9)
                         }

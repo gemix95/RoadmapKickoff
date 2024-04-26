@@ -114,7 +114,12 @@ struct RoadmapFeatureView: View {
     }
     
     func makeForegroundStatusColor(with status: String) -> Color {
-        Color.secondary
+        switch status.lowercased() {
+        case "released":
+            return Color.primary
+        default:
+            return  Color.secondary
+        }
     }
 }
 
